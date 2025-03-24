@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IS-IS (Intermediate System to Intermediate System) Protocol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Century+Gothic&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .slide {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            padding: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        .advantages, .disadvantages {
+            display: flex;
+            justify-content: space-between;
+        }
+        .advantages ul, .disadvantages ul {
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <h1>IS-IS (Intermediate System to Intermediate System) Protocol</h1>
+        <p>A comprehensive overview of the routing protocol used in large-scale networks and service provider environments.</p>
+    </div>
+
+    <div class="slide">
+        <h2>1. Overview of IS-IS Protocol</h2>
+        <ul>
+            <li>Link-state routing protocol operating within a single administrative domain</li>
+            <li>Classified as an Interior Gateway Protocol (IGP), similar to OSPF</li>
+            <li>Widely used in large-scale networks, service provider environments, and ISP backbones</li>
+            <li>Runs directly over Layer 2 (Data Link Layer)</li>
+            <li>Supports both IPv4 and IPv6 through multi-topology IS-IS</li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h2>2. Characteristics of IS-IS</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Protocol Type</td>
+                    <td>Link-State Routing Protocol</td>
+                </tr>
+                <tr>
+                    <td>Algorithm</td>
+                    <td>Dijkstra's Shortest Path First (SPF)</td>
+                </tr>
+                <tr>
+                    <td>Metric Type</td>
+                    <td>Cost-based (default value of 10 per interface)</td>
+                </tr>
+                <tr>
+                    <td>Transport Mechanism</td>
+                    <td>Operates directly over Layer 2 (no dependency on IP)</td>
+                </tr>
+                <tr>
+                    <td>Hierarchical Structure</td>
+                    <td>Supports two levels (Level-1 and Level-2)</td>
+                </tr>
+                <tr>
+                    <td>Network Type</td>
+                    <td>Supports IPv4, IPv6, and MPLS</td>
+                </tr>
+                <tr>
+                    <td>Scalability</td>
+                    <td>Used in large ISPs and enterprise networks</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="slide">
+        <h2>3. IS-IS Packet Types</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Packet Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ES-IS Hello (ESH)</td>
+                    <td>Used between an End System (ES) and an Intermediate System (IS) for discovery</td>
+                </tr>
+                <tr>
+                    <td>IS-IS Hello (IIH)</td>
+                    <td>Used between IS-IS routers to establish and maintain adjacencies</td>
+                </tr>
+                <tr>
+                    <td>Link State PDU (LSP)</td>
+                    <td>Advertises routing information about connected routers and networks</td>
+                </tr>
+                <tr>
+                    <td>Sequence Number PDU (SNP)</td>
+                    <td>Ensures database synchronization between routers</td>
+                </tr>
+                <tr>
+                    <td>Complete Sequence Number PDU (CSNP)</td>
+                    <td>Sends a full list of LSPs to ensure consistency</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="slide">
+        <h2>4. IS-IS Hierarchical Structure</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Level</th>
+                    <th>Function</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Level 1 (L1)</td>
+                    <td>Intra-area routing (similar to OSPF intra-area)</td>
+                </tr>
+                <tr>
+                    <td>Level 2 (L2)</td>
+                    <td>Inter-area routing (similar to OSPF backbone)</td>
+                </tr>
+                <tr>
+                    <td>Level 1-2 (L1/L2)</td>
+                    <td>Routers that act as both L1 and L2, connecting areas</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li>Level 1 routers: Can only see routes inside their area</li>
+            <li>Level 2 routers: Maintain inter-area routing</li>
+            <li>Level 1-2 routers: Act as a bridge between Level 1 and Level 2 networks</li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h2>5. IS-IS Network Types</h2>
+        <h3>5.1 Point-to-Point Networks</h3>
+        <ul>
+            <li>Two routers directly connected</li>
+            <li>Both routers exchange Hello packets and establish an adjacency</li>
+        </ul>
+
+        <h3>5.2 Broadcast (Multi-Access) Networks</h3>
+        <ul>
+            <li>No DR (Designated Router) like OSPF</li>
+            <li>Elects a Designated Intermediate System (DIS) to manage LSP flooding</li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h2>6. IS-IS vs OSPF Comparison</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>IS-IS</th>
+                    <th>OSPF</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Protocol Origin</td>
+                    <td>OSI Model</td>
+                    <td>IP Model</td>
+                </tr>
+                <tr>
+                    <td>Encapsulation</td>
+                    <td>Layer 2 (Ethernet)</td>
+                    <td>IP (Protocol 89)</td>
+                </tr>
+                <tr>
+                    <td>Area Types</td>
+                    <td>Level 1, Level 2, L1/L2</td>
+                    <td>Backbone (0), Normal, Stub, NSSA</td>
+                </tr>
+                <tr>
+                    <td>Metric Calculation</td>
+                    <td>Simple cost (default 10)</td>
+                    <td>Bandwidth-based cost</td>
+                </tr>
+                <tr>
+                    <td>Scalability</td>
+                    <td>More scalable for large ISPs</td>
+                    <td>Best for enterprise networks</td>
+                </tr>
+                <tr>
+                    <td>IPv6 Support</td>
+                    <td>Uses Multi-Topology IS-IS</td>
+                    <td>Uses OSPFv3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="slide">
+        <h2>7. IS-IS Configuration on Cisco Routers</h2>
+        <div class="code-block">
+            <pre><code># Step 1: Enable IS-IS Process
+router isis
+ net 49.0001.0000.0000.0001.00  # IS-IS NET Address
+
+# Step 2: Configure Interfaces
+interface GigabitEthernet0/0
+ ip router isis
+ isis network point-to-point
+
+# Step 3: Define IS-IS Levels
+router isis
+ is-type level-2
+
+# Step 4: Enable IPv6 Routing
+router isis
+ address-family ipv6</code></pre>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>8. Advantages and Disadvantages</h2>
+        <div class="advantages">
+            <h3>Advantages</h3>
+            <ul>
+                <li>Highly scalable (used in large ISP networks)</li>
+                <li>Less overhead since it runs over Layer 2</li>
+                <li>Supports IPv4, IPv6, and MPLS without major changes</li>
+                <li>Faster convergence compared to OSPF in large networks</li>
+            </ul>
+        </div>
+        <div class="disadvantages">
+            <h3>Disadvantages</h3>
+            <ul>
+                <li>More complex configuration compared to OSPF</li>
+                <li>Not as widely adopted in enterprises (mainly used in ISPs)</li>
+                <li>Uses CLNS addressing, which is not as intuitive as IP addressing</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>9. Conclusion</h2>
+        <p>IS-IS is a powerful, scalable, and flexible link-state routing protocol used in large ISP and service provider networks. It offers:</p>
+        <ul>
+            <li>Better scalability due to simple metric system</li>
+            <li>Efficient LSP flooding</li>
+            <li>Preferred choice for ISPs and large-scale networking deployments</li>
+        </ul>
+    </div>
+</body>
+</html>
